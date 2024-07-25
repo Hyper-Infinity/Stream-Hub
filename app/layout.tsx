@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs"
 import { dark } from "@clerk/themes";
+import { Toaster } from "sonner"
 import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,7 +27,9 @@ export default function RootLayout({
             forcedTheme="dark"
             storageKey="StreamHub-theme"
             enableSystem
-            disableTransitionOnChange>
+            disableTransitionOnChange
+          >
+            <Toaster theme="light" position="bottom-center"/>
             {children}
           </ThemeProvider>
         </body>

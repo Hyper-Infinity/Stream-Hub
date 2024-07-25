@@ -48,6 +48,11 @@ export async function POST(req: Request) {
                 clerkUserId: payload.data.id,
                 userName: payload.data.username,
                 imageUrl: payload.data.image_url,
+                stream: {
+                    create: {
+                        name: `${payload.data.username}'s Stream`
+                    }
+                }
             }
         })
     }
