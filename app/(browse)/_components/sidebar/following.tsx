@@ -5,7 +5,7 @@ import { Follow, User } from "@prisma/client"
 import { UserItem, UserItemSkeleton } from "./user-item"
 
 interface followingProps {
-    data: (Follow & { following: User })[]
+    data: (Follow & { following: User & {stream: {isLive: boolean} | null} })[]
 }
 
 export const Following = ({ data }: followingProps) => {
@@ -23,7 +23,7 @@ export const Following = ({ data }: followingProps) => {
         </div>}
         <ul className="space-y-2 px-2">
             {data.map((follow, ind) => {
-                return <UserItem key={ind} user={follow.following} />
+                return <UserItem key={follow.following.id} user={follow.following} isLive={follow.following.stream?.isLive} />
             })}
         </ul>
     </div>

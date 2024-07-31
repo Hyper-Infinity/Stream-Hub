@@ -23,6 +23,9 @@ export const getUserByUserName = async (username: string) => {
     const userData = await db.user.findFirst({
         where: {
             userName: username
+        }, 
+        include: {
+            stream: true
         }
     });
     return userData;
@@ -36,7 +39,7 @@ export const getSelfByUserNmae = async (userName: string) => {
 
     const selfData = await db.user.findUnique({
         where: {
-            userName
+            userName: userName
         }
     })
 
@@ -49,4 +52,16 @@ export const getSelfByUserNmae = async (userName: string) => {
     }
 
     return selfData;
+}
+
+export const getUserById = async (userId: string) => {
+    const user = await db.user.findUnique({
+        where: {
+            id: userId
+        }, 
+        include: {
+            stream: true
+        }
+    })
+    return user;
 }
