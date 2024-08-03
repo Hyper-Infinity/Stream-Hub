@@ -64,7 +64,7 @@ export const ChatForm = ({
                 placeholder="Send a message"
                 className={cn(
                     "border-white/30",
-                    isChatFollowerOnly && "rounded-t-none border-t-0"
+                    (isChatFollowerOnly || isChatDelayed) && "rounded-t-none border-t-0"
                 )}
             />
         </div>

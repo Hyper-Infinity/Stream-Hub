@@ -6,7 +6,7 @@ import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { onFollow } from "@/actions/follow";
+import { onFollow, onUnfollow } from "@/actions/follow";
 import { toast } from "sonner";
 import { hostname } from "os";
 import { Skeleton } from "../ui/skeleton";
@@ -30,15 +30,15 @@ export const Actions = ({
     const handleFollow = () => {
         startTransition(() => {
             onFollow(hostId)
-                .then(() => toast.success(`You are now following ${hostname} 🥳🥳`, { duration: 1500 }))
+                .then((data) => toast.success(`You are now following ${data.following.userName} 🥳🥳`, { duration: 1500 }))
                 .catch(() => toast.error("Something went wrong 🤯🤯", { duration: 1500 }));
         })
     }
 
     const handleUnfollow = () => {
         startTransition(() => {
-            onFollow(hostId)
-                .then(() => toast.success(`You Unfollowed ${hostname} 😢😢`, { duration: 1500 }))
+            onUnfollow(hostId)
+                .then((data) => toast.success(`You Unfollowed ${data.following.userName} 😢😢`, { duration: 1500 }))
                 .catch(() => toast.error("Something went wrong 🤯🤯", { duration: 1500 }));
         });
     }

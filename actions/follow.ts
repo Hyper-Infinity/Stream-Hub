@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 export const onFollow = async (id: string) => {
     try {
         const data = await followUser(id);
-
+        console.log(data);
         revalidatePath('/');
 
         if (data) {
@@ -33,6 +33,7 @@ export const onUnfollow = async (id: string) => {
         return data;
 
     } catch(e) { 
+        console.log(e);
         throw new Error("Internal server error !");
     }
 }

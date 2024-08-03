@@ -114,11 +114,12 @@ export const unfollowUser = async (id: string) => {
         }
     });
 
+    console.log("Hii6");
     return unfollow;
 }
 
 export const getFollowedUsers = async () => {
-    try {   
+    try {
         const user = await getSelf();
         const allFollowedUser = await db.follow.findMany({
             where: {
@@ -144,7 +145,7 @@ export const getFollowedUsers = async () => {
             }
         })
         return allFollowedUser;
-    } catch(e) {
+    } catch (e) {
         return [];
-    }  
+    }
 }
