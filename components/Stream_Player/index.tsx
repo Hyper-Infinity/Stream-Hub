@@ -15,13 +15,30 @@ import { Header, HeaderSkeleton } from "./header"
 import { InfoCard } from "./info-card"
 import { AboutCard } from "./about-card"
 
+type CustomStream = {
+    name: string;
+    id: string;
+    thumbnailUrl: string | null;
+    isLive: boolean;
+    isChatEnabled: boolean;
+    isChatDelayed: boolean;
+    isChatFollowerOnly: boolean;
+}
+
+type CustomUser = {
+    id: string;
+    userName: string;
+    imageUrl: string;
+    clerkUserId: string;
+    bio: string | null;
+}
 
 interface StreamPlayerProps {
-    user: User & { 
-        stream: Stream | null, 
-        _count: {followedBy: number}
+    user: CustomUser & {
+        stream: CustomStream | null,
+        _count: { followedBy: number }
     },
-    stream: Stream,
+    stream: CustomStream,
     isFollowing: boolean
 }
 
@@ -51,7 +68,7 @@ export const StreamPlayer = ({
         >
             <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
                 <Video hostName={user.userName} hostId={user.id} />
-                <Header 
+                <Header
                     hostName={user.userName}
                     hostId={user.id}
                     viewerName={name}
@@ -59,14 +76,14 @@ export const StreamPlayer = ({
                     isFollowing={isFollowing}
                     name={stream.name}
                 />
-                <InfoCard 
+                <InfoCard
                     hostId={user.id}
                     hostName={user.userName}
                     viewerName={name}
                     name={stream.name}
                     thumbnailUrl={stream.thumbnailUrl}
                 />
-                <AboutCard 
+                <AboutCard
                     hostName={user.userName}
                     hostId={user.id}
                     viewerName={name}
